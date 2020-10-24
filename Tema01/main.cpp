@@ -200,8 +200,11 @@ public:
         this->hp = hp;
         this->attack_speed = attack_speed;
         this->movement_speed = movement_speed;
+        
         this->skin.setNameOfSkin(name_of_skin);
         this->skin.setPriceInRp(price_in_rp);
+        /* Se poate inlocui cu this->skin.setAll(name_of_skin, price_in_rp); */
+        
         this->abilities.setPassiveName(passive_name);
         this->abilities.setQAbbilityName(q_ability_name);
         this->abilities.setWAbbilityName(w_ability_name);
@@ -211,6 +214,7 @@ public:
         this->abilities.setWDmg(w_dmg);
         this->abilities.setEDmg(e_dmg);
         this->abilities.setRDmg(r_dmg);
+        /* Se poate inlocui cu this->abilites.setAll(passive_name, q_ability_name, w_ability_name,e_ability_name,r_ability_name, q_dmg, w_dmg, e_dmg, r_dmg); */
     }
 
     // CONSTRUCTOR //
@@ -223,8 +227,11 @@ public:
         this->hp = hp;
         this->attack_speed = attack_speed;
         this->movement_speed = movement_speed;
+        
         this->skin.setNameOfSkin(name_of_skin);
         this->skin.setPriceInRp(price_in_rp);
+        /* Se poate inlocui cu this->skin.setAll(name_of_skin, price_in_rp); */
+        
         this->abilities.setPassiveName(passive_name);
         this->abilities.setQAbbilityName(q_ability_name);
         this->abilities.setWAbbilityName(w_ability_name);
@@ -234,6 +241,7 @@ public:
         this->abilities.setWDmg(w_dmg);
         this->abilities.setEDmg(e_dmg);
         this->abilities.setRDmg(r_dmg);
+        /* Se poate inlocui cu this->abilites.setAll(passive_name, q_ability_name, w_ability_name,e_ability_name,r_ability_name, q_dmg, w_dmg, e_dmg, r_dmg); */
     }
 
 
@@ -244,8 +252,11 @@ public:
         this->hp = 0;
         this->attack_speed = 0;
         this->movement_speed = 0;
+        
         this->skin.setNameOfSkin("NoName");
         this->skin.setPriceInRp(0);
+        /* Se poate inlocui cu this->skin.setAll("", 0); */
+        
         this->abilities.setPassiveName("NoName");
         this->abilities.setQAbbilityName("NoName");
         this->abilities.setWAbbilityName("NoName");
@@ -255,6 +266,8 @@ public:
         this->abilities.setWDmg(0);
         this->abilities.setEDmg(0);
         this->abilities.setRDmg(0);
+        /* Se poate inlocui cu this->abilites.setAll("NoName", "NoName","NoName","NoName","NoName", 0, 0, 0, 0); */
+        
     }
 
     // DESTRUCTOR //
