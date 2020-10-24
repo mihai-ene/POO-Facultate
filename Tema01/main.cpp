@@ -288,7 +288,6 @@ int main() {
             1350,"Way of the wanderer", "Steel Tempest", "Wind Wall",
             "Sweeping Blade", "Last Brath", 50, 25, 20, 100);
     Champion Tryndamere("Tryndamere", 90,2100,2.2,
-
             350,"Demonblade Tryndamere",1820,
             "Battle Fury", "Bloodlust", "Mocking Shout",
             "Spinning Slash", "Undying Rage",20,40,50,150);
