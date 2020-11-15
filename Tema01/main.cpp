@@ -58,7 +58,7 @@ public:
     double getRDmg(){return r_dmg;}
 
     void setAll(std::string passive_name,std::string q_ability_name,std::string w_ability_name,
-    std::string e_ability_name,std::string r_ability_name,double q_dmg,double w_dmg,double e_dmg,double r_dmg){
+                std::string e_ability_name,std::string r_ability_name,double q_dmg,double w_dmg,double e_dmg,double r_dmg){
 
         this->q_ability_name = q_ability_name;
         this->w_ability_name = w_ability_name;
@@ -72,8 +72,8 @@ public:
     }
 
     // CONSTRUCTOR //
-    Abilities(std::string passive_name,std::string q_ability_name,std::string w_ability_name,
-                std::string e_ability_name,std::string r_ability_name,double q_dmg,double w_dmg,double e_dmg,double r_dmg){
+    Abilities(std::string passive_name = "NoName",std::string q_ability_name = "NoName",std::string w_ability_name = "NoName",
+              std::string e_ability_name = "NoName",std::string r_ability_name = "NoName",double q_dmg = 0,double w_dmg = 0,double e_dmg = 0,double r_dmg = 0){
         this->q_ability_name = q_ability_name;
         this->w_ability_name = w_ability_name;
         this->e_ability_name = e_ability_name;
@@ -82,18 +82,6 @@ public:
         this->w_dmg = w_dmg;
         this->e_dmg = e_dmg;
         this->r_dmg = r_dmg;
-    }
-
-    // DEFAULT CONSTRUCTOR //
-    Abilities(){
-        this->q_ability_name = "NoName";
-        this->w_ability_name = "NoName";
-        this->e_ability_name = "NoName";
-        this->r_ability_name = "NoName";
-        this->q_dmg = 0;
-        this->w_dmg = 0;
-        this->e_dmg = 0;
-        this->r_dmg = 0;
     }
 
     // DESTRUCTOR //
@@ -123,16 +111,9 @@ public:
     }
 
     // CONSTRUCTOR //
-    Skin(std::string name_of_skin, double price_in_RP){
+    Skin(std::string name_of_skin="", double price_in_RP=0){
         this->name_of_skin = name_of_skin;
         this->price_in_RP = price_in_RP;
-    }
-
-    // DEFAULT CONSTRUCTOR //
-    Skin()
-    {
-        this->name_of_skin = "";
-        this->price_in_RP = 0;
     }
 
     // DESTURCTOR //
@@ -192,19 +173,19 @@ public:
     Abilities getAbilites(){return abilities;}
 
     void setAll(std::string name,double standard_dmg,double hp,
-    double attack_speed,double movement_speed,std::string name_of_skin,
-    double price_in_rp, std::string passive_name,std::string q_ability_name,std::string w_ability_name,
-    std::string e_ability_name,std::string r_ability_name,double q_dmg,double w_dmg,double e_dmg,double r_dmg){
+                double attack_speed,double movement_speed,std::string name_of_skin,
+                double price_in_rp, std::string passive_name,std::string q_ability_name,std::string w_ability_name,
+                std::string e_ability_name,std::string r_ability_name,double q_dmg,double w_dmg,double e_dmg,double r_dmg){
         this->name = name;
         this->standard_dmg = standard_dmg;
         this->hp = hp;
         this->attack_speed = attack_speed;
         this->movement_speed = movement_speed;
-        
+
         this->skin.setNameOfSkin(name_of_skin);
         this->skin.setPriceInRp(price_in_rp);
         /* Se poate inlocui cu this->skin.setAll(name_of_skin, price_in_rp); */
-        
+
         this->abilities.setPassiveName(passive_name);
         this->abilities.setQAbbilityName(q_ability_name);
         this->abilities.setWAbbilityName(w_ability_name);
@@ -218,20 +199,20 @@ public:
     }
 
     // CONSTRUCTOR //
-    Champion(std::string name,double standard_dmg,double hp,
-                double attack_speed,double movement_speed,std::string name_of_skin,
-                double price_in_rp, std::string passive_name,std::string q_ability_name,std::string w_ability_name,
-                std::string e_ability_name,std::string r_ability_name,double q_dmg,double w_dmg,double e_dmg,double r_dmg){
+    Champion(std::string name = "NoName",double standard_dmg = 0,double hp = 0,
+             double attack_speed = 0,double movement_speed = 0,std::string name_of_skin = "NoName",
+             double price_in_rp = 0, std::string passive_name = "NoName",std::string q_ability_name = "NoName",std::string w_ability_name="NoName",
+             std::string e_ability_name = "NoName",std::string r_ability_name = "NoName",double q_dmg = 0,double w_dmg = 0,double e_dmg = 0,double r_dmg = 0){
         this->name = name;
         this->standard_dmg = standard_dmg;
         this->hp = hp;
         this->attack_speed = attack_speed;
         this->movement_speed = movement_speed;
-        
+
         this->skin.setNameOfSkin(name_of_skin);
         this->skin.setPriceInRp(price_in_rp);
         /* Se poate inlocui cu this->skin.setAll(name_of_skin, price_in_rp); */
-        
+
         this->abilities.setPassiveName(passive_name);
         this->abilities.setQAbbilityName(q_ability_name);
         this->abilities.setWAbbilityName(w_ability_name);
@@ -244,52 +225,34 @@ public:
         /* Se poate inlocui cu this->abilites.setAll(passive_name, q_ability_name, w_ability_name,e_ability_name,r_ability_name, q_dmg, w_dmg, e_dmg, r_dmg); */
     }
 
-
-    // DEFAULT CONSTRUCTOR //
-    Champion(){
-        this->name = "NoName";
-        this->standard_dmg = 0;
-        this->hp = 0;
-        this->attack_speed = 0;
-        this->movement_speed = 0;
-        
-        this->skin.setNameOfSkin("NoName");
-        this->skin.setPriceInRp(0);
-        /* Se poate inlocui cu this->skin.setAll("", 0); */
-        
-        this->abilities.setPassiveName("NoName");
-        this->abilities.setQAbbilityName("NoName");
-        this->abilities.setWAbbilityName("NoName");
-        this->abilities.setEAbbilityName("NoName");
-        this->abilities.setRAbbilityName("NoName");
-        this->abilities.setQDmg(0);
-        this->abilities.setWDmg(0);
-        this->abilities.setEDmg(0);
-        this->abilities.setRDmg(0);
-        /* Se poate inlocui cu this->abilites.setAll("NoName", "NoName","NoName","NoName","NoName", 0, 0, 0, 0); */
-        
-    }
-
     // DESTRUCTOR //
     ~Champion(){
         std::cout<<"Destroying "<< this->name<<"\n";
     }
 
     //  Functii prin care un campion foloseste o abilitate asupra altui campion//
-    void useQ_on(Champion x){
+    void useQ_on(Champion &x){
         std::cout<<name<<" used his Q ability called "<<abilities.getQAbbilityName()<<" and dealt "<<abilities.getQDmg()<<" DMG to "<<x.name<<"\n";
+        x.hp -= abilities.getQDmg();
+        std::cout<<x.name<<" now has "<<x.hp<<" HP"<<"\n";
     }
 
-    void useW_on(Champion x){
+    void useW_on(Champion &x){
         std::cout<<name<<" used his W ability called "<<abilities.getWAbbilityName()<<" and dealt "<<abilities.getWDmg()<<" DMG to "<<x.name<<"\n";
+        x.hp -= abilities.getWDmg();
+        std::cout<<x.name<<" now has "<<x.hp<<" HP"<<"\n";
     }
 
-    void useE_on(Champion x){
+    void useE_on(Champion &x){
         std::cout<<name<<" used his E ability called "<<abilities.getEAbbilityName()<<" and dealt "<<abilities.getEDmg()<<" DMG to "<<x.name<<"\n";
+        x.hp -= abilities.getEDmg();
+        std::cout<<x.name<<" now has "<<x.hp<<" HP"<<"\n";
     }
 
-    void useR_on(Champion x){
+    void useR_on(Champion &x){
         std::cout<<name<<" used his R ability called "<<abilities.getRAbbilityName()<<" and dealt "<<abilities.getRDmg()<<" DMG to "<<x.name<<"\n";
+        x.hp -= abilities.getRDmg();
+        std::cout<<x.name<<" now has "<<x.hp<<" HP"<<"\n";
     }
 
 
@@ -298,24 +261,32 @@ public:
 int main() {
 
     Champion Yasuo("Yasuo",100,2000,2.5,350,"High Noon Yasuo",
-            1350,"Way of the wanderer", "Steel Tempest", "Wind Wall",
-            "Sweeping Blade", "Last Brath", 50, 25, 20, 100);
+                   1350,"Way of the wanderer", "Steel Tempest", "Wind Wall",
+                   "Sweeping Blade", "Last Brath", 50, 25, 20, 100);
     Champion Tryndamere("Tryndamere", 90,2100,2.2,
-            350,"Demonblade Tryndamere",1820,
-            "Battle Fury", "Bloodlust", "Mocking Shout",
-            "Spinning Slash", "Undying Rage",20,40,50,150);
+                        350,"Demonblade Tryndamere",1820,
+                        "Battle Fury", "Bloodlust", "Mocking Shout",
+                        "Spinning Slash", "Undying Rage",20,40,50,150);
+
+    std::cout<<Yasuo.getName()<<" has "<<Yasuo.getHp()<<" before the battle."<<"\n";
+    std::cout<<Tryndamere.getName()<<" has "<<Tryndamere.getHp()<<" before the battle."<<"\n";
+    std::cout<<"\n";
 
     Yasuo.useQ_on(Tryndamere);
     Tryndamere.useQ_on(Yasuo);
+    std::cout<<"\n";
 
     Yasuo.useW_on(Tryndamere);
     Tryndamere.useW_on(Yasuo);
+    std::cout<<"\n";
 
     Yasuo.useE_on(Tryndamere);
     Tryndamere.useE_on(Yasuo);
+    std::cout<<"\n";
 
     Yasuo.useR_on(Tryndamere);
     Tryndamere.useR_on(Yasuo);
-    
+    std::cout<<"\n";
+
     return 0;
 }
