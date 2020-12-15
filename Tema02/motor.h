@@ -8,9 +8,9 @@ private:
 public:
     motor(std::string, int, float);
     ~motor();
-    std::string getDenumire();
-    int getPutere();
-    float getConsum();
+    std::string getDenumire() const;
+    int getPutere() const;
+    float getConsum() const;
     motor(const motor&);
 };
 
@@ -37,13 +37,13 @@ motor::motor(const motor &other){
     this->putere = other.putere;
     this->consum = other.consum;
 }
-std::string motor::getDenumire() {
+std::string motor::getDenumire() const{
     return this->denumire;
 }
-float motor::getConsum() {
+float motor::getConsum() const {
     return this->consum;
 }
-int motor::getPutere() {
+int motor::getPutere() const {
     return this->putere;
 }
 
