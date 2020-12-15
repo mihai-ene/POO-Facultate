@@ -1,6 +1,6 @@
 #include "motor.h"
 class masina{
-private:
+protected:
     std::string marca;
     std::string model;
     std::string culoare;
