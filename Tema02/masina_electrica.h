@@ -6,7 +6,7 @@ private:
 public:
     masina_electrica(motor&, std::string,std::string,std::string,int, float);
     void sunet();
-    void print();
+    friend std::ostream& operator<<(std::ostream& os, const masina_electrica& m);
     float getCapacitateBaterie(){return this->capacitate_baterie;}
 };
 
@@ -14,12 +14,14 @@ masina_electrica::masina_electrica(motor &m, std::string marca, std::string mode
     this->capacitate_baterie = capacitate_baterie;
 }
 void masina_electrica::sunet() {std::cout<<this->getModel()<<" este o masina electrica, deci nu face zgomot\n";}
-void masina_electrica::print() {std::cout<<"\n##################\n"<<"Marca: "<<this->getMarca()
-                                         <<"\n"<<"Model: "<<this->getModel()
-                                         <<"\n"<<"Culoare: "<<this->getCuloare()
-                                         <<"\n"<<"Nr locuri: "<<this->getNrLocuri()
-                                         <<"\n"<<"Capacitate baterie: "<<this->capacitate_baterie<<"A"
-                                         <<"\n"<<"Denumire motor: "<<getMotor().getDenumire()
-                                         <<"\n"<<"Putere motor: "<<getMotor().getPutere()<<" Cai putere"
-                                         <<"\n"<<"Consum motor: "<<getMotor().getConsum()<<" W"
-                                         <<"\n##################\n\n";}
+std::ostream& operator<<(std::ostream& os, const masina_electrica& m ) {os<<"\n##################\n"<<"Marca: "<<m.marca
+                                         <<"\n"<<"Model: "<<m.model
+                                         <<"\n"<<"Culoare: "<<m.culoare
+                                         <<"\n"<<"Nr locuri: "<<m.nr_locuri
+                                         <<"\n"<<"Capacitate baterie: "<<m.capacitate_baterie<<"A"
+                                         <<"\n"<<"Denumire motor: "<<m.Motor.getDenumire()
+                                         <<"\n"<<"Putere motor: "<<m.Motor.getPutere()<<" Cai putere"
+                                         <<"\n"<<"Consum motor: "<<m.Motor.getConsum()<<" W"
+                                         <<"\n##################\n\n";
+    return os;
+}
