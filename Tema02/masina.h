@@ -15,7 +15,14 @@ public:
     std::string getCuloare(){return this->culoare;}
     int getNrLocuri(){return this->nr_locuri;}
     virtual void sunet();
-    virtual void print();
+    friend std::ostream& operator<<(std::ostream& os, const masina& m);
+    masina& operator=(const masina &other){
+        this->marca = other.marca;
+        this->model = other.model;
+        this->culoare = other.culoare;
+        this->nr_locuri = other.nr_locuri;
+        this->Motor = other.Motor;
+    }
 };
 
 
@@ -42,11 +49,16 @@ masina::masina(motor &m,std::string marca, std::string model, std::string culoar
 
 masina::~masina(){std::cout<<"Am distrus masina "<<this->model<<"\n";}
 void masina::sunet() {std::cout<<this->model<<" face Vruuuum\n";}
-void masina::print() {std::cout<<"\n##################\n"<<"Marca: "<<this->marca
-                               <<"\n"<<"Model: "<<this->model
-                               <<"\n"<<"Culoare: "<<this->culoare
-                               <<"\n"<<"Nr locuri: "<<this->nr_locuri
-                               <<"\n"<<"Denumire motor: "<<Motor.getDenumire()
-                               <<"\n"<<"Putere motor: "<<Motor.getPutere()<<" Cai putere"
-                               <<"\n"<<"Consum motor: "<<Motor.getConsum()<<" %"
-                               <<"\n##################\n\n";}
+
+std::ostream& operator<<(std::ostream& os, const masina& m ){
+    os <<"\n##################\n"<<"Marca: "<<m.marca
+          <<"\n"<<"Model: "<<m.model
+          <<"\n"<<"Culoare: "<<m.culoare
+          <<"\n"<<"Nr locuri: "<<m.nr_locuri
+          <<"\n"<<"Denumire motor: "<<m.Motor.getDenumire()
+          <<"\n"<<"Putere motor: "<<m.Motor.getPutere()<<" Cai putere"
+          <<"\n"<<"Consum motor: "<<m.Motor.getConsum()<<" %"
+          <<"\n##################\n\n";
+    return os;
+}
+
