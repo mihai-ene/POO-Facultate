@@ -13,7 +13,7 @@ int main() {
     std::unique_ptr<masina_electrica> tesla(new masina_electrica(*motor_electric, "Tesla","Model S", "Neagra",4,2000));
 
     std::cout<<*Dacie;
-
+    std::cout<<*tesla;
 
     tesla->sunet();
     Dacie->sunet();
