@@ -12,26 +12,23 @@ public:
     int getPutere() const;
     float getConsum() const;
     motor(const motor&);
+    motor& operator=(const motor &other){
+        this->denumire = other.denumire;
+        this->putere = other.putere;
+        this->consum = other.consum;
+        return *this;
+    }
 };
 
 motor::motor(std::string denumire, int putere, float consum){
-    try{
         if (denumire !="" && putere>=50 && consum >= 1){
             this->denumire = denumire;
             this->putere = putere;
             this->consum = consum;
-        }else{
-            throw 1;
-        }
-    }
-    catch (int Error){
-        std::cout<<"Error code: "<<Error<<"\n"
-                 <<"- Denumirea motorului nu poate fi nula"<<"\n"
-                 <<"- Puterea motorului nu poate fi mai mica ca 50 de cai putere"<<"\n"
-                 <<"- Consumul motorului nu poate fi mai mic ca 1%"<<"\n";
-    }
+        }else
+            throw std::invalid_argument("Argumentele pentru motor nu sunt valide\n");
 
-};
+}
 motor::motor(const motor &other){
     this->denumire = other.denumire;
     this->putere = other.putere;
