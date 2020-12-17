@@ -98,8 +98,10 @@ void masina::accelereaza(int &treapta_curenta, float &pozitie_curenta, float vit
 }
 
 void masina::franeaza(int &treapta_curenta, float &pozitie_curenta, float viteza) {
-    pozitie_curenta-=viteza;
-    treapta_curenta--;
+    if (treapta_curenta >= 0 ){
+        pozitie_curenta -= viteza;
+        treapta_curenta--;
+    }
 }
 
 void masina::afisare_info(float pozitie,int treapta) const {
