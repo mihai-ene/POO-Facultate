@@ -80,15 +80,20 @@ std::ostream& operator<<(std::ostream& os, const masina& m ){
 }
 int masina::calculare_delay() const {
     if (this->cutie_viteza == "manuala") {
-        return 3; // Schimbarea vitezei unei masini manuale dureaza 3s
+        return 3; // Schimbarea vitezei unei masini manuale dureaza 2.5s
     }
-    return 1; // Schimbarea vitezei unei masini automate dureaza 1s
+    return 1; // Schimbarea vitezei unei masini automate dureaza 1.2s
 }
 
 void masina::accelereaza(int &treapta_curenta, float &pozitie_curenta, float viteza, int delay) const {
-    pozitie_curenta+=viteza;
-    std::this_thread::sleep_for(std::chrono::seconds(delay));
-    treapta_curenta++;
+    if (treapta_curenta < this->nr_viteze) {
+        pozitie_curenta += viteza;
+        std::this_thread::sleep_for(std::chrono::seconds(delay));
+        treapta_curenta++;
+    }
+    else{
+        pozitie_curenta+=viteza;
+    }
 
 }
 
@@ -128,22 +133,11 @@ void masina::intrecere(const masina &x) {
     float pozitie_curenta_masina1 = 0, pozitie_curenta_masina2 = 0;
     int treapta_curenta_masina1 = 0, treapta_curenta_masina2 = 0;
     while (pozitie_curenta_masina1 < distanta && pozitie_curenta_masina2 < distanta){
-        if(treapta_curenta_masina1 != this->nr_viteze){
             this->accelereaza(treapta_curenta_masina1,pozitie_curenta_masina1,viteza_pe_secunda_masina1,delay_masina1);
             this->afisare_info(pozitie_curenta_masina1,treapta_curenta_masina1);
-        }
-        else{
-            this->afisare_info(pozitie_curenta_masina1,treapta_curenta_masina1);
-            pozitie_curenta_masina1 += viteza_pe_secunda_masina1;
-        }
-        if(treapta_curenta_masina2 != x.nr_viteze){
+
             x.accelereaza(treapta_curenta_masina2,pozitie_curenta_masina2,viteza_pe_secunda_masina2,delay_masina2);
             x.afisare_info(pozitie_curenta_masina2,treapta_curenta_masina2);
-        }
-        else{
-            x.afisare_info(pozitie_curenta_masina2,treapta_curenta_masina2);
-            pozitie_curenta_masina2 += viteza_pe_secunda_masina2;
-        }
     }
     if (pozitie_curenta_masina1 >= distanta)
         std::cout<<"A castigat "<<this->marca<<" "<<this->model<<"! \n";
