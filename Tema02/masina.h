@@ -80,9 +80,9 @@ std::ostream& operator<<(std::ostream& os, const masina& m ){
 }
 int masina::calculare_delay() const {
     if (this->cutie_viteza == "manuala") {
-        return 3; // Schimbarea vitezei unei masini manuale dureaza 2.5s
+        return 3; // Schimbarea vitezei unei masini manuale dureaza 3s
     }
-    return 1; // Schimbarea vitezei unei masini automate dureaza 1.2s
+    return 1; // Schimbarea vitezei unei masini automate dureaza 1s
 }
 
 void masina::accelereaza(int &treapta_curenta, float &pozitie_curenta, float viteza, int delay) const {
