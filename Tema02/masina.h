@@ -86,14 +86,12 @@ int masina::calculare_delay() const {
 }
 
 void masina::accelereaza(int &treapta_curenta, float &pozitie_curenta, float viteza, int delay) const {
+    pozitie_curenta+=viteza;
     if (treapta_curenta < this->nr_viteze) {
-        pozitie_curenta += viteza;
         std::this_thread::sleep_for(std::chrono::seconds(delay));
         treapta_curenta++;
     }
-    else{
-        pozitie_curenta+=viteza;
-    }
+
 
 }
 
