@@ -1,6 +1,7 @@
 #include "motor.h"
-#include <Windows.h>
-#include <unistd.h>
+#include <chrono>
+#include <thread>
+
 
 class masina{
 protected:
@@ -12,6 +13,8 @@ protected:
     int nr_viteze;
     int viteza_maxima;
     motor Motor;
+private:
+    void afisare_info(float pozitie,int treapta) const;
 public:
     masina(motor&,std::string,std::string,std::string,int,std::string,int,int);
     ~masina();
@@ -38,9 +41,10 @@ public:
 
         return *this;
     }
-    float calculare_delay() const;
+    int calculare_delay() const;
+    void accelereaza(int &treapta_curenta,float &pozitie_curenta, float viteza,int delay) const ;
+    void franeaza(int &treapta_curenta,float &pozitie_curenta, float viteza);
 };
-
 
 masina::masina(motor &m,std::string marca, std::string model, std::string culoare, int nr_locuri,std::string cutie_viteza,int nr_viteze,int viteza_maxima) : Motor(m) {
     if (marca != "" && model != "" && culoare != "" && nr_locuri > 1 && nr_viteze > 0 && viteza_maxima > 10 && (cutie_viteza == "manuala" || cutie_viteza == "automata") ) {
@@ -74,18 +78,38 @@ std::ostream& operator<<(std::ostream& os, const masina& m ){
        <<"\n##################\n\n";
     return os;
 }
-float masina::calculare_delay() const {
+int masina::calculare_delay() const {
     if (this->cutie_viteza == "manuala") {
-        return 2.5; // Schimbarea vitezei unei masini manuale dureaza 2.5s
+        return 3; // Schimbarea vitezei unei masini manuale dureaza 2.5s
     }
-    return 1.2; // Schimbarea vitezei unei masini automate dureaza 1.2s
+    return 1; // Schimbarea vitezei unei masini automate dureaza 1.2s
+}
+
+void masina::accelereaza(int &treapta_curenta, float &pozitie_curenta, float viteza, int delay) const {
+    pozitie_curenta+=viteza;
+    std::this_thread::sleep_for(std::chrono::seconds(delay));
+    treapta_curenta++;
+
+}
+
+void masina::franeaza(int &treapta_curenta, float &pozitie_curenta, float viteza) {
+    pozitie_curenta-=viteza;
+    treapta_curenta--;
+}
+
+void masina::afisare_info(float pozitie,int treapta) const {
+    if (treapta < this->nr_viteze)
+        std::cout <<this->marca<<" "<<this->model<< " a schimbat in treapta " << treapta << " si a parcurs o distanta de  " << pozitie <<" metri \n";
+    else
+        std::cout <<this->marca<<" "<<this->model<<" se afla in ultima treapta de viteza "<< " si a parcurs o distanta de  " << pozitie <<" metri \n";
+
 }
 
 void masina::intrecere(const masina &x) {
     // MASINA 1 = THIS
     // MASINA 2 = X (Masina cu care se intrece)
 
-    float delay_masina1, delay_masina2;
+    int delay_masina1, delay_masina2;
     delay_masina1 = this->calculare_delay();
     delay_masina2 = x.calculare_delay();
 
@@ -101,26 +125,23 @@ void masina::intrecere(const masina &x) {
     std::cout << "Introduceti distanta pe care se vor intrece cele doua masini (m): ";
     std::cin>>distanta;
 
-    float pozitie_curenta_masina1 = 0, pozitie_curenta_masina2 = 0, treapta_curenta_masina1 = 0, treapta_curenta_masina2 = 0;
+    float pozitie_curenta_masina1 = 0, pozitie_curenta_masina2 = 0;
+    int treapta_curenta_masina1 = 0, treapta_curenta_masina2 = 0;
     while (pozitie_curenta_masina1 < distanta && pozitie_curenta_masina2 < distanta){
         if(treapta_curenta_masina1 != this->nr_viteze){
-            pozitie_curenta_masina1 += viteza_pe_secunda_masina1;
-            sleep(delay_masina1);
-            treapta_curenta_masina1++;
-            std::cout <<this->marca<<" "<<this->model<< " a schimbat in treapta " << treapta_curenta_masina1 << " si a parcurs o distanta de  " << pozitie_curenta_masina1 <<" metrii \n";
+            this->accelereaza(treapta_curenta_masina1,pozitie_curenta_masina1,viteza_pe_secunda_masina1,delay_masina1);
+            this->afisare_info(pozitie_curenta_masina1,treapta_curenta_masina1);
         }
         else{
-            std::cout <<this->marca<<" "<<this->model<<" se afla in ultima treapta de viteza "<< " si a parcurs o distanta de  " << pozitie_curenta_masina1 <<" metrii \n";
+            this->afisare_info(pozitie_curenta_masina1,treapta_curenta_masina1);
             pozitie_curenta_masina1 += viteza_pe_secunda_masina1;
         }
         if(treapta_curenta_masina2 != x.nr_viteze){
-            pozitie_curenta_masina2 += viteza_pe_secunda_masina2;
-            sleep(delay_masina2);
-            treapta_curenta_masina2++;
-            std::cout <<x.marca<<" "<<x.model<< " a schimbat in treapta " << treapta_curenta_masina2 << " si a parcurs o distanta de  " << pozitie_curenta_masina2 <<" metrii \n";
+            x.accelereaza(treapta_curenta_masina2,pozitie_curenta_masina2,viteza_pe_secunda_masina2,delay_masina2);
+            x.afisare_info(pozitie_curenta_masina2,treapta_curenta_masina2);
         }
         else{
-            std::cout <<x.marca<<" "<<x.model<<" se afla in ultima treapta de viteza "<< " si a parcurs o distanta de  " << pozitie_curenta_masina2 <<" metrii \n";
+            x.afisare_info(pozitie_curenta_masina2,treapta_curenta_masina2);
             pozitie_curenta_masina2 += viteza_pe_secunda_masina2;
         }
     }
