@@ -17,7 +17,6 @@ int main() {
         catch(std::exception &ex){
             std::cout<<ex.what();
         } */
-
     std::unique_ptr<masina> Dacie = std::make_unique<masina>(*motor1,"Dacie","Duster","Rosie",5,"manuala",5,180);
     std::unique_ptr<masina> BMW = std::make_unique<masina>(*motor1,"BMW","M4","Neagra",4,"automata",7,250);
 
