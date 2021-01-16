@@ -39,7 +39,7 @@ int main() {
     masina_builder tesla_builder;
     masina tesla = tesla_builder.marcamasina("Tesla").model("Model S").cutie_viteza("automata").nr_viteze(6).viteza_maxima(270).Motor(*motor_electric).build();
 
-    // Inainte de cursa, stabilesc care masina are motorul cu cei mai multi cari putere.
+    // Inainte de cursa, stabilesc care masina are motorul cu cei mai multi cai putere.
     motor a;
     a = getMaxHoursePower<motor>(*motor1, *motor_electric);
     std::cout<<"Cel mai puternic motor: "<<a;
