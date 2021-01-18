@@ -1,4 +1,10 @@
 #include "motor.h"
+
+motor::motor() {
+    this->denumire = "";
+    this->putere = 0;
+    this->consum = 0;
+}
 motor::motor(std::string denumire, int putere, float consum){
     if (denumire !="" && putere>=50 && consum >= 1){
         this->denumire = denumire;
@@ -25,4 +31,11 @@ int motor::getPutere() const {
 
 motor::~motor(){
     std::cout << "Am distrus motorul " << this->denumire <<"\n";
+}
+std::ostream& operator<<(std::ostream& os, const motor& m ){
+    os <<"\n##################\n"<<"Denumire: "<<m.denumire
+       <<"\n"<<"Putere: "<<m.putere
+       <<"\n"<<"Consum: "<<m.consum
+       <<"\n##################\n\n";
+    return os;
 }
